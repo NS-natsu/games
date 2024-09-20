@@ -1,0 +1,11 @@
+tetoris: interface.o proc.o screen.o
+	gcc -o tetoris interface.o proc.o screen.o
+
+interface.o: tet.c sys/bag.h sys/mino.h sys/rotate.h sys/movement.h screen/screen.h
+	gcc -c tet.c
+
+proc.o: sys\$@
+	gcc -c sys\$*.c
+
+screen.o: screen\screen.c sys/bag.h sys/mino.h
+	gcc -c screen.c
