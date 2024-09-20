@@ -26,17 +26,20 @@
         #include "../sys/mino.h"
         #define ESCAPE_SEQUENCE "\033[%d;%dH\033[38;5;%.3sm%s"
 
+        //hold next*4 field score text
         static unsigned char offset[10][2] = {
-            {4, 4}, //hold
-            {4, 43}, {8, 44}, {12, 44}, {16, 44}, //next
-            {2, 19}, //field
-            {12, 5},{13, 9},{15, 9}, //score
-            {18, 1} //text
+            #include "offset.txt"
         };
         
-        static char colors[8][3];//0 未設置
-        static unsigned char line[4][182];
-        static unsigned char offsetLine[10] = {0};
+        static char colors[8][3] = {
+            #include "mino/colorData.txt"
+        };//0 未設置
+        static unsigned char line[4][182]= {
+            #include "line.txt"
+        };
+        static unsigned char offsetLine[10] = {
+            #include "offsetLine.txt"
+        };
 
         static int lineSkin[FIELD_HEIGHT] = {0};
 

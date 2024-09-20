@@ -118,7 +118,9 @@ void draw(Mino *m, Observe *ob, int update){
     printf("%3d\t %3d\n", m->x, m->y);
     printf("%3d\t %3d\n", m->l, m->r);
     printf("%3d\t %3d\n", m->rot, m->b);
-    printf("%3d\t %10llu", m->t, ob->log.flameElapse);
+    printf("%3d\t %10llu\n", m->t, ob->log.flameElapse);
+    printf("%3d\t %3d\n", ob->log.ground, ob->state);
+    printf("%3d\t %3d", ob->log.arrivalDepth, ob->waitDown);
 }
 
 static void drawMino(Mino *m){

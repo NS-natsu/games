@@ -25,7 +25,7 @@ del estimate.o
 del interface.o
 
 cd ..\
-del tetoris.exe
+del tetris.exe
 gcc -c tet.c
 
 gcc -o tetris tet.o input\input.o screen\screen.o sys\system.o console_setup\console_setup.o

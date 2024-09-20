@@ -14,17 +14,8 @@ int moveD(Observe* ob, int n){
             score = 0;
         }
         ob->log.score += score;
-
-        if(ob->log.arrivalDepth < mino.y){
-            ob->log.arrivalDepth = mino.y;
-            ob->log.ground = 0;
-    
-            if(mino.b == 0){
-                ob->log.ground = 16;
-                statI.waitDown = ROCKDOWN;
-            }
-        }
     }else ret = 2;
+
 
     return ret;
 }
@@ -35,11 +26,16 @@ int moveH(Observe* ob, int n){
     if(moveHorizontal(&mino, (n << 1) - 1)){
         getVerticalMoves(&mino);
         mino.rt = 0;
+    }else ret = 0;
+
+    return ret;
+}
+
+int rot(Observe* ob, int n){
+    int ret = 1;
+    if(rotate(n)){
+        getVerticalMoves(&mino);
         
-        if(1 < ob->log.ground){
-            ob->log.ground -= 1;
-            statI.waitDown = ROCKDOWN;
-        }
     }else ret = 0;
 
     return ret;

@@ -30,14 +30,14 @@
 
             unsigned long long int flameElapse;
         } log;
+        char waitDown; //debug
+        int state; //debug
     } Observe;
     
     #if defined(_INTERFACE_C_) | defined(_ESTIMATE_C_) 
         #include "../sys/mino.h"
         #include "../sys/movement.h"
         #include "../screen/screen.h"
-
-        #define ROCKDOWN 30
 
         struct _statI{
             char waitLeft;  char repeatLeft;
@@ -58,17 +58,19 @@
         extern int operation(Observe*,int*);
     #else
         #include <windows.h>
-        #include "../sys/rotate.h"
         
         #define GetKey(k) (GetAsyncKeyState(k) & 0x8000)
         
         extern int evaluate(Observe*);
         extern int moveH(Observe*, int);
         extern int moveD(Observe*, int);
+        extern int rot(Observe*, int);
 
-        static char hInterval[2] = {10, 3}; 
+        #define SoftDrop (2)
+
+        static char hInterval[2] = {10, 3};
         static char fInterval[16] = {
-            ROCKDOWN, 48, 44, 40, 36, 32,
+            30, 48, 44, 40, 36, 32,
             28, 24, 20, 16, 12, 8, 6, 4, 2, 1
         };
         struct _statI statI = {0};
@@ -80,6 +82,7 @@
 
     #ifndef _ESTIMATE_C_
     #else
+        #include "../sys/rotate.h"
         extern struct _statI statI;
         
         //基本スコア

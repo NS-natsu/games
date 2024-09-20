@@ -6,6 +6,11 @@ static int getInput(char a, char b){
     return (ret * 3) | (!!GetKey(b) << 1);
 }
 
+static void setDropWait(int v){
+    statI.waitDown = hInterval[0];
+    statI.waitDown /= 1 + (v - 1) * (v - 1);
+}
+
 int input(Observe* ob) {
     if(GetAsyncKeyState(VK_ESCAPE) & 0x8000) return -1;
     if(GetAsyncKeyState('E') & 0x8000){
@@ -18,7 +23,7 @@ int input(Observe* ob) {
     }
     
     ob->reload = 0;
-    if(GetAsyncKeyState('U') & 0x8000){
+    if(GetAsyncKeyState('R') & 0x8000){
         if(!(statI.repeatReload)){
             ob->reload = 1;
         }
@@ -63,20 +68,20 @@ int input(Observe* ob) {
         statI.repeatBottom = 0;
         if(!(statI.repeatDown)){
             input = 1;
-            op->vMove = 1;
+            op->vMove = 2;
             statI.repeatDown = 1;
-            statI.waitDown = fInterval[ob->log.level] / 20;
+            statI.waitDown = SoftDrop;
         } else if(--(statI.waitDown) <= 0){
             input = 1;
-            op->vMove = 1;
-            if(ob->log.ground) statI.waitDown = fInterval[0];
-            else statI.waitDown = fInterval[ob->log.level] / 20;
+            op->vMove = 2;
+            if(ob->log.ground && fInterval[0] < statI.waitDown) statI.waitDown = fInterval[0];
+            else statI.waitDown = SoftDrop;
         }
     } else if(buff){//hard drop
         statI.repeatDown = 0;
         if(!(statI.repeatBottom)){
             input = 1;
-            op->vMove = 2;
+            op->vMove = 3;
             statI.repeatBottom = 1;
             statI.waitDown = fInterval[0];
         }else if(--(statI.waitDown) <= 0){
@@ -120,6 +125,7 @@ int input(Observe* ob) {
         op->hMove = 0;
         return 0;
     }
+    ob->waitDown = statI.waitDown;
     return input;
 }
 
@@ -145,22 +151,25 @@ int operation(Observe* ob, int *chFlag){
                 statI.waitDown /= 20;
         }
     } else if(ob->ope.rot){
-        state = rotate(ob->ope.rot - 1);
-        if(ob->log.arrivalDepth < mino.y){
-            ob->log.arrivalDepth = mino.y;
-    
-            if(ob->log.ground){
-                ob->log.ground = 16;
-                statI.waitDown = ROCKDOWN;
-            }
-        } else if(state && 1 < ob->log.ground){
-            ob->log.ground -= 1;
-            statI.waitDown = ROCKDOWN;
-        }
+        state = rot(ob, ob->ope.rot - 1);
         ob->log.before = BO_ROTATE;
+        if(state){
+            if(ob->log.arrivalDepth < mino.y)
+                ob->log.arrivalDepth = mino.y;
+            if(mino.b) statI.waitDown = 5;
+            else if(1 < ob->log.ground){
+                ob->log.ground -= 1;
+                setDropWait(ob->ope.vMove);
+            }else ob->log.ground = 16;
+        }
     }else if(ob->ope.hMove){
         state = moveH(ob, ob->ope.hMove - 1);
         ob->log.before = BO_WIDEMOVE;
+        if(state && 1 < ob->log.ground){
+            ob->log.ground -= 1;
+            if(!mino.b) setDropWait(ob->ope.vMove);
+            else statI.waitDown = 5;
+        }
     }
 
     if(ob->log.ground == 1) {
@@ -169,16 +178,24 @@ int operation(Observe* ob, int *chFlag){
     }
 
     if(ob->ope.vMove){
-        state = moveD(ob, ob->ope.vMove - 1);
+        state = ob->state = moveD(ob, (ob->ope.vMove - 1) >> 1);
+        if(state == 2) {
+            int val = evaluate(ob);
+            if(val){
+                ob->log.installate = 30;
+                setString(val - 1);
+            } else ob->log.installate = 5;
+        }else {
+            if(ob->log.arrivalDepth < mino.y){
+                ob->log.arrivalDepth = mino.y;
+            }
+            if(mino.b == 0){
+                ob->log.ground = 16 * !ob->log.ground;
+                setDropWait(ob->ope.vMove);
+            }
+        }
     }
 
-    if(state == 2) {
-        int val = evaluate(ob);
-        if(val){
-            ob->log.installate = 30;
-            setString(val - 1);
-        } else ob->log.installate = 5;
-    }
 
     if(ob->log.installate){
         switch(ob->log.installate){
