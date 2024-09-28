@@ -5,5 +5,7 @@
 コード参照(https://kmiya-culti.github.io/RLogin/ctrlcode.html)
 
 # 迷路
+winapiを使用した迷路
+StretchBitBltsを使用してコマンドプロンプトに描画
 
 
