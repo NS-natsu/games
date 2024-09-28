@@ -1,1 +1,0 @@
-gcc tet.c m\bag.c m\bitlib.c m\mino.c m\movement.c m\rotate.c screen\screen.c
