@@ -11,4 +11,6 @@ StretchBitBltsを使用してコマンドプロンプトに描画
 3d迷路
 並列処理の実験用
 コンソールの各ピクセルごとに表示する色を探索するために三重ループを使用
-
+ディスプレイのスケールやdpiを取得していないため、100%の時以外は正常に動作しない
+(shellscalingapi.hがなかったため代替手段を模索中)
+![image](https://github.com/user-attachments/assets/b8fee536-6aa0-4922-8375-f7724bdb88b3)
