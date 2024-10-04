@@ -4,7 +4,7 @@
 
 制御コード(主にESCとCSI)
 
-winapi(StretchBitBlts)
+winapi(StretchDIBits)
 
 
 # テトリス
