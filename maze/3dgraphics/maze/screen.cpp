@@ -211,11 +211,12 @@ void Screen::mapVisualize(Map& map, Player& player){
 		for (int ny = 0; ny < map.getHeight(); ny++)
 				fillRect(5 * nx, 5 * ny, 5, 5, map.getPos(nx, ny) * 5000);
 
-	fillRect(1 + (int)(player.getX()) * 5, 1 + (int)(player.getY()) * 5, 5, 5,L'P');
+	fillRect(int(player.getX()) * 5, int(player.getY()) * 5, 5, 5,L'P');
 	
 	float fPlayerAngleX = cosf(player.getHAngle()) * 2.5f;
 	float fPlayerAngleY = sinf(player.getHAngle()) * 2.5f;
-	setPixel(1 + (int)(player.getX()) * 5 + (int)(2.5f + fPlayerAngleX), 1 + (int)(player.getY()) * 5 + (int)(2.5f + fPlayerAngleY), 0x00ff0000);
+	setPixel(int(player.getX()) * 5 + int(2.5f + fPlayerAngleX),
+			 int(player.getY()) * 5 + int(2.5f + fPlayerAngleY), 0x00ff0000);
 }
 
 void Screen::update(Map& map, Player& player){

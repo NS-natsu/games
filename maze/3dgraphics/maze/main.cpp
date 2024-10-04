@@ -14,8 +14,6 @@ void start(){
 	Screen s = Screen();
 	Interface i = Interface();
 
-
-
 	int r;
 	auto tp1 = std::chrono::system_clock::now();
 	auto tp2 = std::chrono::system_clock::now();
@@ -27,6 +25,7 @@ void start(){
 		float fElapsedTime = elapsedTime.count();
 		if(1.f<fElapsedTime) fElapsedTime = 1.f;
 		r = i.onUserUpdate(fElapsedTime, p, map, s);
+
 		if(r==-1) break;
 		else if(s.updateScreenBuff()|| r){
 			s.update(map, p);
@@ -35,6 +34,7 @@ void start(){
 	while(kbhit()) _getch();
 	while(!kbhit());
 }
+
 int main(){
 	omp_set_nested(1);
 	start();
