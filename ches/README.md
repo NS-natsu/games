@@ -14,4 +14,4 @@
 
 実行前に自動で変更する仕組みの追加が必要(テトリス参照)
 
-![image](https://github.com/user-attachments/assets/31c4c738-bfd5-4a6e-a1a9-b645e894247f)
+![image](https://github.com/user-attachments/assets/9e068e17-25d1-4912-a77d-b6600f861295)
