@@ -13,10 +13,6 @@ winapi(StretchBitBlts)
 
 ![image](https://github.com/user-attachments/assets/dabadd34-5fe4-406c-9a11-2fb29101962e)
 
-ライン消去時
-
-![image](https://github.com/user-attachments/assets/9ef3db27-14b4-4099-bddd-7ff1a5de4b0e)
-
 # 迷路
 
 3d迷路
