@@ -1,0 +1,1 @@
+g++ -o maze *.cpp -lgdi32 -fopenmp -static-libgcc -static-libstdc++ -Wl,-Bstatic,--whole-archive -lwinpthread -lgomp -Wl,--no-whole-archive
