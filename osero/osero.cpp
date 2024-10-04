@@ -28,8 +28,8 @@ class save {
 	FILE *tmp1, *tmp2;
 public:
 	save() {
-		tmpfile_s(&tmp1);
-		tmpfile_s(&tmp2);
+		tmp1 = tmpfile();
+		tmp2 = tmpfile();
 	}
 	~save() {
 		fclose(tmp1);
@@ -39,7 +39,7 @@ public:
 		FILE *fp;
 		int buff = 0;
 		char place[3] = { 0 };
-		tmpfile_s(&fp);
+		fp = tmpfile();
 		fseek(tmp1, 0, SEEK_SET);
 		for (int i = 0; i < labor-1; i++) {
 			buff = fgetc(tmp1);
@@ -52,8 +52,8 @@ public:
 		tmp1 = fp;
 		place[0] = 'A' + side - 1;
 		place[1] = '0' + ver;
-		fprintf_s(tmp1, "%s", place);
-		fprintf_s(tmp2, "%s", place);
+		fprintf(tmp1, "%s", place);
+		fprintf(tmp2, "%s", place);
 	}
 	void dicision() {
 		FILE *fp;
@@ -99,28 +99,27 @@ class Undo_Redo {
 	int _labor;
 public:
 	Undo_Redo() {
-		tmpfile_s(&tmp);
+		tmp = tmpfile();
 		_labor=0;
 	}
 	~Undo_Redo() {
 		fclose(tmp);
 	}
 	void Do() {
-		FILE *fp;
+		FILE *fp = tmpfile();
 		char buff[(boardsize + 2)*(boardsize + 2)+2] = { 0 };
-		tmpfile_s(&fp);
 		_labor = labor;
 		fseek(tmp, 0, SEEK_SET);
 		for (int i = 0; i < _labor; i++) {
 			fgets(buff, sizeof(buff), tmp);
-			fprintf_s(fp, "%s", buff);
+			fprintf(fp, "%s", buff);
 		}
 		fclose(tmp);
 		tmp = fp;
 		for (int i = 0; i < boardsize + 2; i++)
 			for (int j = 0; j < boardsize + 2; j++)
-				fprintf_s(tmp, "%d", board[i][j]);
-		fprintf_s(tmp, "\n");
+				fprintf(tmp, "%d", board[i][j]);
+		fprintf(tmp, "\n");
 	}
 	void undo() {
 		if (2 < labor) {
