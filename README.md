@@ -1,9 +1,10 @@
 # C(C++)言語を使用したゲーム制作
 
+出力で主に使用するもの
 
-制御コード(主にESCとCSI)を使用した表現
+制御コード(主にESCとCSI)
 
-winapi(StretchBitBlts)を使用した描画
+winapi(StretchBitBlts)
 
 
 # テトリス
