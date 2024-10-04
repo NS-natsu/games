@@ -1,0 +1,110 @@
+@@space
+   __   
+  |  |  
+  |  |  
+   ~~   
+@@place
+   __   
+  |xx|  
+  |xx|  
+   ~~   
+@@wall
+ |^^^^| 
+ |m  m| 
+ | ll | 
+ |____| 
+@@nomal_B
+ mmmmmm 
+mmmmmmmm
+mmmmmmmm
+ mmmmmm 
+@@turn1_B
+ mmmm   
+ mmmmm  
+  mmmmm 
+   mmmm 
+@@turn2_B
+  mmm   
+  mmm   
+   mmm  
+   mmm  
+@@turn3_B
+   om   
+   om   
+   om   
+   om   
+@@turn4_B
+   ooo  
+   ooo  
+  ooo   
+  ooo   
+@@turn5_B
+  oooo  
+ oooooo 
+ oooooo 
+  oooo  
+@@turn6_B
+ oooooo 
+oooooooo
+oooooooo
+ oooooo 
+@@nomal_H
+ oooooo 
+oooooooo
+oooooooo
+ oooooo 
+@@turn1_H
+ oooo   
+ ooooo  
+  ooooo 
+   oooo 
+@@turn2_H
+  ooo   
+  ooo   
+   ooo  
+   ooo  
+@@turn3_H
+   mo   
+   mo   
+   mo   
+   mo   
+@@turn4_H
+   mmm  
+   mmm  
+  mmm   
+  mmm   
+@@turn5_H
+  mmmm  
+ mmmmmm 
+ mmmmmm 
+  mmmm  
+@@turn6_H
+ mmmmmm 
+mmmmmmmm
+mmmmmmmm
+ mmmmmm 
+@@serect0
+\  __  \
+  |  |  
+  |  |  
+\  ~~  \
+@@serect1
+\mmmmmm\
+mmmmmmmm
+mmmmmmmm
+\mmmmmm\
+@@serect2
+\oooooo\
+oooooooo
+oooooooo
+\oooooo\
+@@serect3
+\  __  \
+  |xx|  
+  |xx|  
+\  ~~  \
+@@serect4
+\|^^^^|\
+ |m  m| 
+ | ll | 
+\|____|\
