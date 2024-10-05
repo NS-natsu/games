@@ -20,10 +20,10 @@ winapi(StretchDIBits)
 ![image](https://github.com/user-attachments/assets/b8fee536-6aa0-4922-8375-f7724bdb88b3)
 
 
-#オセロ
+# オセロ
 
 ![image](https://github.com/user-attachments/assets/31c4c738-bfd5-4a6e-a1a9-b645e894247f)
 
-#チェス
+# チェス
 
 ![image](https://github.com/user-attachments/assets/9e068e17-25d1-4912-a77d-b6600f861295)
