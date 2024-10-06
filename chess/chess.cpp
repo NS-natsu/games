@@ -20,26 +20,26 @@ struct Stat {
 	unsigned int dopawn : 1;
 } stat[2];
 enum Color {
-	L_BLACK,	// ’á‹P“xE•F
-	L_BLUE,		// ’á‹P“xEÂF
-	L_GREEN,	// ’á‹P“xE—ÎF
-	L_CYAN,		// ’á‹P“xE…F
-	L_RED,		// ’á‹P“xEÔF
-	L_PURPLE,	// ’á‹P“xEŽ‡F
-	L_YELLOW,	// ’á‹P“xE‰©F
-	L_WHITE,	// ’á‹P“xE”’F
+	L_BLACK,	// ä½Žè¼åº¦ãƒ»é»’è‰²
+	L_BLUE,		// ä½Žè¼åº¦ãƒ»é’è‰²
+	L_GREEN,	// ä½Žè¼åº¦ãƒ»ç·‘è‰²
+	L_CYAN,		// ä½Žè¼åº¦ãƒ»æ°´è‰²
+	L_RED,		// ä½Žè¼åº¦ãƒ»èµ¤è‰²
+	L_PURPLE,	// ä½Žè¼åº¦ãƒ»ç´«è‰²
+	L_YELLOW,	// ä½Žè¼åº¦ãƒ»é»„è‰²
+	L_WHITE,	// ä½Žè¼åº¦ãƒ»ç™½è‰²
 
-	H_BLACK,	// ‚‹P“xE•F
-	H_BLUE,		// ‚‹P“xEÂF
-	H_GREEN,	// ‚‹P“xE—ÎF
-	H_CYAN,		// ‚‹P“xE…F
-	H_RED,		// ‚‹P“xEÔF
-	H_PURPLE,	// ‚‹P“xEŽ‡F
-	H_YELLOW,	// ‚‹P“xE‰©F
-	H_WHITE,	// ‚‹P“xE”’F
+	H_BLACK,	// é«˜è¼åº¦ãƒ»é»’è‰²
+	H_BLUE,		// é«˜è¼åº¦ãƒ»é’è‰²
+	H_GREEN,	// é«˜è¼åº¦ãƒ»ç·‘è‰²
+	H_CYAN,		// é«˜è¼åº¦ãƒ»æ°´è‰²
+	H_RED,		// é«˜è¼åº¦ãƒ»èµ¤è‰²
+	H_PURPLE,	// é«˜è¼åº¦ãƒ»ç´«è‰²
+	H_YELLOW,	// é«˜è¼åº¦ãƒ»é»„è‰²
+	H_WHITE,	// é«˜è¼åº¦ãƒ»ç™½è‰²
 };
 class CConsole {
-HANDLE		m_hConsoleStdOut;	// o—ÍƒRƒ“ƒ\[ƒ‹‚Ìƒnƒ“ƒhƒ‹
+HANDLE		m_hConsoleStdOut;	// å‡ºåŠ›ã‚³ãƒ³ã‚½ãƒ¼ãƒ«ã®ãƒãƒ³ãƒ‰ãƒ«
 public:
 	CConsole() {
 		m_hConsoleStdOut = ::GetStdHandle(STD_OUTPUT_HANDLE);
@@ -243,7 +243,7 @@ int input(void) {
 	while(1) {
 		if (GetAsyncKeyState(VK_LSHIFT)) {
 			G.SetColor();
-			printf("’x‰„%dƒ~ƒŠ•b",time);
+			printf("é…å»¶%dãƒŸãƒªç§’",time);
 			while (GetAsyncKeyState(VK_LSHIFT));
 			G.Clear(); Print();
 		}
@@ -279,14 +279,14 @@ void check_castling(){
 }
 int ischeck(int place= (10 * (y + 1)) + (x + 1),int type=!turn){
 	int verify=0, shift[8] = { -21,-19,-12,-8,8,12,19,21 };
-	for (verify = place - 10; 10 < verify; verify -= 10) {//ã
+	for (verify = place - 10; 10 < verify; verify -= 10) {//ä¸Š
 		if (map[verify] % 100 != 0) {
 			if (place - verify == 10 && map[verify] % 100 == 50 * type + 1) return verify;
 			if (map[verify] % 100 == type * 50 + 2 || map[verify] % 100 == type * 50 + 5) return verify;
 			break;
 		}
 	}
-	for (verify = place - 9; 10 < verify && (place % 10) < (verify % 10); verify -= 9) {//‰Eã
+	for (verify = place - 9; 10 < verify && (place % 10) < (verify % 10); verify -= 9) {//å³ä¸Š
 		if (map[verify] % 100 != 0) {
 			if (place - verify == 9 && map[verify] % 100 == 50 * type + 1) return verify;
 			if (!type && place - verify == 9 && map[verify] % 100 == 6) return verify;
@@ -294,12 +294,12 @@ int ischeck(int place= (10 * (y + 1)) + (x + 1),int type=!turn){
 			break;
 		}
 	}
-	for (verify = place + 1; verify % 10 < 9; verify++) if (map[verify] % 100 != 0) {//‰E
+	for (verify = place + 1; verify % 10 < 9; verify++) if (map[verify] % 100 != 0) {//å³
 			if (verify - place == 1 && map[verify] % 100 == 50 * type + 1) return verify;
 			if (map[verify] % 100 == type * 50 + 2 || map[verify] % 100 == type * 50 + 5) return verify;
 			break;
 		}
-	for (verify = place + 11; verify < 89 && (place % 10) < (verify % 10); verify += 11) {//‰E‰º
+	for (verify = place + 11; verify < 89 && (place % 10) < (verify % 10); verify += 11) {//å³ä¸‹
 		if (map[verify] % 100 != 0) {
 			if (type && verify - place == 11 && map[verify] % 100 == 56) return verify;
 			if (verify - place == 11 && map[verify] % 100 == 50 * type + 1) return verify;
@@ -307,14 +307,14 @@ int ischeck(int place= (10 * (y + 1)) + (x + 1),int type=!turn){
 			break;
 		}
 	}
-	for (verify = place + 10; verify < 89; verify += 10) {//‰º
+	for (verify = place + 10; verify < 89; verify += 10) {//ä¸‹
 		if (map[verify] % 100 != 0) {
 			if (verify - place == 10 && map[verify] % 100 == 50 * type + 1) return verify;
 			if (map[verify] % 100 == type * 50 + 2 || map[verify] % 100 == type * 50 + 5) return verify;
 			break;
 		}
 	}
-	for (verify = place + 9; verify < 89 && (verify % 10) < (place % 10); verify += 9) {//¶‰º
+	for (verify = place + 9; verify < 89 && (verify % 10) < (place % 10); verify += 9) {//å·¦ä¸‹
 		if (map[verify] % 100 != 0) {
 			if (type && verify - place == 9 && map[verify] % 100 == 56) return verify;
 			if (verify - place == 9 && map[verify] % 100 == 50 * type + 1) return verify;
@@ -322,12 +322,12 @@ int ischeck(int place= (10 * (y + 1)) + (x + 1),int type=!turn){
 			break;
 		}
 	}
-	for (verify = place - 1; 0 < verify % 10; verify--)if (map[verify] % 100 != 0) {//¶
+	for (verify = place - 1; 0 < verify % 10; verify--)if (map[verify] % 100 != 0) {//å·¦
 		if (place - verify == 1 && map[verify] % 100 == 50 * type + 1) return verify;
 		if (map[verify] % 100 == type * 50 + 2 || map[verify] % 100 == type * 50 + 5) return verify;
 		break;
 	}
-	for (verify = place - 11; 10 < verify && (verify % 10) < (place % 10); verify -= 11) {//¶ã
+	for (verify = place - 11; 10 < verify && (verify % 10) < (place % 10); verify -= 11) {//å·¦ä¸Š
 		if (map[verify] % 100 != 0) {
 			if (!type && place - verify == 11 && map[verify] % 100 == 6) return verify;
 			if (place - verify == 11 && map[verify] % 100 == 50 * type + 1) return verify;
@@ -439,7 +439,7 @@ static void Print(void) {
 		baseX += 2 * CHARSIZE;
 	}
 	G.SetCursorPosition(0, 9 * CHARSIZE);
-	G.SetColor();printf("\rŽè”Ô:%s", (turn ? "•" : "”’"));
+	G.SetColor();printf("\ræ‰‹ç•ª:%s", (turn ? "é»’" : "ç™½"));
 };
 static void lvup_pawn(Color color) {
 	short baseX, baseY;
@@ -484,7 +484,7 @@ static void motion(int val) {
 	char str[12] = { 0 }, ch[4] = { 0 };
 	bool turn = true;
 	if (val < 0) val *= -1, turn = !turn;
-	if (val % 9 == 0) { // ¶‰º
+	if (val % 9 == 0) { // å·¦ä¸‹
 		for (int i = 0; i < (val / 9) * CHARSIZE; i++) {
 			Print();
 			fseek(graf, SPACE + (map[put] % 50)*NEXT, SEEK_SET);
@@ -499,7 +499,7 @@ static void motion(int val) {
 			Sleep(time);
 		}
 	}
-	else if (val % 10 == 0) {//‰º
+	else if (val % 10 == 0) {//ä¸‹
 		for (int i = 0; i < (int)(val / 10) * CHARSIZE; i++) {
 			Print();
 			fseek(graf, SPACE + (map[put] % 50)*NEXT, SEEK_SET);
@@ -514,7 +514,7 @@ static void motion(int val) {
 			Sleep(time);
 		}
 	}
-	else if (val % 11 == 0) {//‰E‰º
+	else if (val % 11 == 0) {//å³ä¸‹
 		for (int i = 0; i < (val / 9) * CHARSIZE; i++) {
 			Print();
 			fseek(graf, SPACE + (map[put] % 50)*NEXT, SEEK_SET);
@@ -529,7 +529,7 @@ static void motion(int val) {
 			Sleep(time);
 		}
 	}
-	else if (val == 8) {//ŽÎ‚ß¶‰º
+	else if (val == 8) {//æ–œã‚å·¦ä¸‹
 		for (int i = 0; i < 2 * CHARSIZE; i++) {
 			Print();
 			fseek(graf, SPACE + (map[put] % 50)*NEXT, SEEK_SET);
@@ -544,7 +544,7 @@ static void motion(int val) {
 			Sleep(time);
 		}
 	}
-	else if (val == 12) {//ŽÎ‚ß‰E‰º
+	else if (val == 12) {//æ–œã‚å³ä¸‹
 		for (int i = 0; i < 2 * CHARSIZE; i++) {
 			Print();
 			fseek(graf, SPACE + (map[put] % 50)*NEXT, SEEK_SET);
@@ -559,7 +559,7 @@ static void motion(int val) {
 			Sleep(time);
 		}
 	}
-	else if (val == 19) {//ŽÎ‚ß‰º¶
+	else if (val == 19) {//æ–œã‚ä¸‹å·¦
 		for (int i = 0; i < 2 * CHARSIZE; i += 2) {
 			Print();
 			fseek(graf, SPACE + (map[put] % 50)*NEXT, SEEK_SET);
@@ -574,7 +574,7 @@ static void motion(int val) {
 			Sleep(time);
 		}
 	}
-	else if (val == 21) {//ŽÎ‚ß‰º‰E
+	else if (val == 21) {//æ–œã‚ä¸‹å³
 		for (int i = 0; i < 2 * CHARSIZE; i += 2) {
 			Print();
 			fseek(graf, SPACE + (map[put] % 50)*NEXT, SEEK_SET);
@@ -589,7 +589,7 @@ static void motion(int val) {
 			Sleep(time);
 		}
 	}
-	else {//‚Ý‚¬
+	else {//ã¿ãŽ
 		for (int i = 0; i < val * 2 * CHARSIZE; i += 2) {
 			Print();
 			fseek(graf, SPACE + (map[put] % 50)*NEXT, SEEK_SET);
