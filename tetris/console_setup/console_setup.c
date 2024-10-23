@@ -38,7 +38,7 @@ static int _begin(void* pCInfo, int row, int colmn){
 
 	setConsoleSize(p, row, colmn);
 	
-    printf("\x1B[?25l");
+        printf("\x1B[?25l");
 
 	// Step4: コンソールの出力文字コードをutf-8にする
 	char template[] = "tmpfile-chcp-XXXXXX";
